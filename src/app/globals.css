@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+/* 🌞 Mode clair par défaut */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9fafb; /* gris très clair */
+  --foreground: #111827; /* gris foncé */
+  --card-bg: #ffffff; /* fond cartes */
+  --border-color: #e5e7eb; /* bordures douces */
+  --link-color: #2563eb; /* bleu primaire */
+  --link-hover: #1d4ed8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* 🌙 Mode sombre (actif selon les préférences système) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #101828; /* fond global */
+    --foreground: #e6edf3; /* texte principal */
+    --card-bg: #161b22; /* fond des cartes */
+    --border-color: #30363d; /* bordures subtiles */
+    --link-color: #58a6ff; /* bleu clair */
+    --link-hover: #79c0ff;
   }
 }
 
+/* 🧩 Liaison avec Tailwind */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card-bg);
+  --color-border: var(--border-color);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+/* 🌍 Styles globaux */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 🪶 Liens */
+a {
+  color: var(--link-color);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* 🧱 Cartes, conteneurs, etc. */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔤 Titres */
+h1, h2, h3, h4 {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+/* ✅ Rendu global plus doux */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
